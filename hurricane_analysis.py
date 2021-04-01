@@ -82,15 +82,21 @@ hurricane_dict_year = hurricane_dict_year_constructor(years, names, hurricane_di
 # write your count affected areas function here:
 area_list = []
 new_area_list = []
+specific_area_dict = {}
 def area_count(names, hurricane_dict):
     for i in range(len(names)):
         area_list.append(hurricane_dict[names[i]]['Areas Affected'])
     for area_vals in area_list:
         for area in area_vals:
             new_area_list.append(area)
-    return new_area_list
-area_list = area_count(names, hurricane_dict)
-print(area_list)
+    for val in new_area_list:
+        specific_count = new_area_list.count(val)
+        if val not in specific_area_dict:
+            specific_area_dict[val] = specific_count
+    return specific_area_dict
+specific_area_dict = area_count(names, hurricane_dict)
+
+
 
 
 
