@@ -20,8 +20,8 @@ damages = ['Damages not recorded', '100M', 'Damages not recorded', '40M', '27.9M
 deaths = [90,4000,16,3103,179,184,408,682,5,1023,43,319,688,259,37,11,2068,269,318,107,65,19325,51,124,17,1836,125,87,45,133,603,138,3057,74]
 
 # write your update damages function here:
+fixed_damages = []
 def fix_damage(list):
-    fixed_damages = []
     for val in list:
         if val == 'Damages not recorded':
             fixed_damages.append(val)
@@ -47,8 +47,7 @@ def fix_damage(list):
                 val1 = val1.replace('.', '')
                 fixed_damages.append(float(val1))
     return fixed_damages
-
-
+fixed_damages = fix_damage(damages)
 
 
 
@@ -58,24 +57,40 @@ def fix_damage(list):
 
 
 # write your construct hurricane dictionary function here:
+hurricane_dict = {}
+def hurricane_dict_constructor(names, months, years, max_sustained_winds, areas_affected, fixed_damages, deaths):
+    for i in range(len(names)):
+        hurricane_dict[names[i]] = {'Name': names[i], 'Month': months[i], 'Year': years[i], 'Max Sustained Winds': max_sustained_winds[i], 'Areas Affected': areas_affected[i], 'Damage': fixed_damages[i], 'Deaths': deaths[i]}
+    return hurricane_dict
+hurricane_dict = hurricane_dict_constructor(names, months, years, max_sustained_winds, areas_affected, fixed_damages, deaths)
 
-
+# print(hurricane_dict['Cuba I']['Month'])
 
 
 
 
 
 # write your construct hurricane by year dictionary function here:
-
-
-
-
-
-
+hurricane_dict_year = {}
+def hurricane_dict_year_constructor(years, names, dict):
+    for i in range(len(years)):
+        hurricane_dict_year[years[i]] = hurricane_dict[names[i]]
+    return hurricane_dict_year
+hurricane_dict_year = hurricane_dict_year_constructor(years, names, hurricane_dict)
+# print(hurricane_dict_year)
 
 # write your count affected areas function here:
-
-
+area_list = []
+new_area_list = []
+def area_count(names, hurricane_dict):
+    for i in range(len(names)):
+        area_list.append(hurricane_dict[names[i]]['Areas Affected'])
+    for area_vals in area_list:
+        for area in area_vals:
+            new_area_list.append(area)
+    return new_area_list
+area_list = area_count(names, hurricane_dict)
+print(area_list)
 
 
 
