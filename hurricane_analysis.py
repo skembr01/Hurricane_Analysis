@@ -100,9 +100,16 @@ specific_area_dict = area_count(names, hurricane_dict)
 
 
 
-
-
 # write your find most affected area function here:
+def most_affected_area(specific_area_dict):
+    most_affected_count = 0
+    for i in range(len(specific_area_dict)):
+        key = list(specific_area_dict)[i]
+        if specific_area_dict[key] > most_affected_count:
+            most_affected_count = specific_area_dict[key]
+    return most_affected_count
+# print(most_affected_area(specific_area_dict))
+    
 
 
 
@@ -111,15 +118,53 @@ specific_area_dict = area_count(names, hurricane_dict)
 
 
 # write your greatest number of deaths function here:
-
-
+def deadliest(hurricane_dict):
+    death_toll = 0
+    for i in range(len(hurricane_dict)):
+        key = list(hurricane_dict)[i]
+        if hurricane_dict[key]['Deaths'] > death_toll:
+            death_name = key
+            death_toll = hurricane_dict[key]['Deaths']
+    return death_name, death_toll
+# print(deadliest(hurricane_dict))
 
 
 
 
 
 # write your catgeorize by mortality function here:
-
+def death_categorized(hurricane_dict):
+    death_categorized_dict = {}
+    zero_list = []
+    one_list = []
+    two_list = []
+    three_list = []
+    four_list = []
+    five_list = []
+    for i in range(len(hurricane_dict)):
+        key = list(hurricane_dict)[i]
+        value = hurricane_dict[key]['Deaths']
+        if value == 0:
+            zero_list.append(key)
+        elif value > 0 and value <= 100:
+            one_list.append(key)
+        elif value > 100 and value <= 500:
+            two_list.append(key)
+        elif value > 500 and value <= 1000:
+            three_list.append(key)
+        elif value > 1000 and value <= 10000:
+            four_list.append(key)
+        elif value > 10000:
+            five_list.append(key)
+    death_categorized_dict[0] = zero_list
+    death_categorized_dict[1] = one_list
+    death_categorized_dict[2] = two_list
+    death_categorized_dict[3] = three_list
+    death_categorized_dict[4] = four_list
+    death_categorized_dict[5] = five_list
+    return death_categorized_dict
+# print(death_categorized(hurricane_dict))
+        
 
 
 
@@ -127,11 +172,55 @@ specific_area_dict = area_count(names, hurricane_dict)
 
 
 # write your greatest damage function here:
-
-
+def costliest(hurricane):
+    cost = 0
+    for i in range(len(hurricane_dict)):
+        key = list(hurricane_dict)[i]
+        if type(hurricane_dict[key]['Damage']) == str:
+            continue
+        if hurricane_dict[key]['Damage'] > cost:
+            most_damage = key
+            most_damage_value = hurricane_dict[key]['Damage']
+    return most_damage, most_damage_value 
+# print(costliest(hurricane_dict))
 
 
 
 
 
 # write your catgeorize by damage function here:
+def costliest_categorized(hurricane_dict):
+    costliest_categorized_dict = {}
+    zero_list = []
+    one_list = []
+    two_list = []
+    three_list = []
+    four_list = []
+    five_list = []
+    for i in range(len(hurricane_dict)):
+        key = list(hurricane_dict)[i]
+        value = hurricane_dict[key]['Damage']
+        if type(value) == str:
+            continue
+        if value == 0:
+            zero_list.append(key)
+        elif value > 0 and value <= 100000000:
+            one_list.append(key)
+        elif value > 100000000 and value <= 1000000000:
+            two_list.append(key)
+        elif value > 1000000000 and value <= 10000000000:
+            three_list.append(key)
+        elif value > 10000000000 and value <= 50000000000:
+            four_list.append(key)
+        elif value > 50000000000:
+            five_list.append(key)
+    costliest_categorized_dict[0] = zero_list
+    costliest_categorized_dict[1] = one_list
+    costliest_categorized_dict[2] = two_list 
+    costliest_categorized_dict[3] = three_list
+    costliest_categorized_dict[4] = four_list
+    costliest_categorized_dict[5] = five_list
+    return costliest_categorized_dict
+# print(costliest_categorized(hurricane_dict))
+    
+        
